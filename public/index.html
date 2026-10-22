@@ -2,6 +2,8 @@
 <html lang="pt-BR" class="no-js">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Guinchos Carlinhos | Aluguel de guindastes de 30 a 100 toneladas</title>
   <meta name="description" content="Trans Guinchos Carlinhos: aluguel de guindastes articulados de 30 a 100 toneladas. Solução em elevação de cargas para obras, indústria e montagem de estruturas. Mais de 20 anos no mercado. Orçamento pelo WhatsApp (51) 99727-7891.">
@@ -10,19 +12,9 @@
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="Guinchos Carlinhos — Solução em elevação de cargas">
   <meta property="og:description" content="Guindastes articulados de 30 a 100 toneladas. Mais de 20 anos no mercado. Orçamento direto no WhatsApp.">
-  <meta property="og:image" content="assets/img/montagem-estrutura.webp">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
-  <script>
-    (function (d) {
-      var r = d.documentElement;
-      r.classList.replace('no-js', 'js');
-      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        r.classList.add('js-anim');
-        setTimeout(function () { if (!window.__animReady) r.classList.remove('js-anim'); }, 4000);
-      }
-    })(document);
-  </script>
+  <script src="assets/js/boot.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +35,7 @@
   </script>
 </head>
 <body>
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <svg class="sprite" aria-hidden="true" focusable="false">
     <defs>
       <linearGradient id="arrow-grad" x1="1" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#F0102E"/>
@@ -82,7 +74,7 @@
         <a href="#como-pedir">Como pedir</a>
       </nav>
 
-      <a class="btn btn--yellow btn--sm" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20de%20guindaste." target="_blank" rel="noopener">
+      <a class="btn btn--yellow btn--sm" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20de%20guindaste." target="_blank" rel="noopener noreferrer">
         <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>
         <span class="btn__label-long">(51) 99727-7891</span>
         <span class="btn__label-short">WhatsApp</span>
@@ -112,7 +104,7 @@
           </p>
 
           <div class="hero__actions" data-hero-fade>
-            <a class="btn btn--yellow btn--lg" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20de%20guindaste." target="_blank" rel="noopener">
+            <a class="btn btn--yellow btn--lg" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20de%20guindaste." target="_blank" rel="noopener noreferrer">
               <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>
               Pedir orçamento no WhatsApp
             </a>
@@ -220,7 +212,7 @@
                   <span class="job__num">01</span>
                   <h3 class="h3">Construção civil</h3>
                   <p>Tijolos, vigas, lajes e materiais içados direto para o pavimento certo. Menos carregamento manual, obra andando no ritmo.</p>
-                  <a class="link-arrow" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20uma%20obra." target="_blank" rel="noopener">Orçar para minha obra <svg class="ico ico--sm" aria-hidden="true"><use href="#i-go"/></svg></a>
+                  <a class="link-arrow" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20uma%20obra." target="_blank" rel="noopener noreferrer">Orçar para minha obra <svg class="ico ico--sm" aria-hidden="true"><use href="#i-go"/></svg></a>
                 </div>
               </article>
 
@@ -236,7 +228,7 @@
                   <span class="job__num">02</span>
                   <h3 class="h3">Indústria</h3>
                   <p>Tanques, máquinas e equipamentos pesados descarregados e posicionados na base com controle, do caminhão até o ponto de instalação.</p>
-                  <a class="link-arrow" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20movimenta%C3%A7%C3%A3o%20industrial." target="_blank" rel="noopener">Orçar movimentação industrial <svg class="ico ico--sm" aria-hidden="true"><use href="#i-go"/></svg></a>
+                  <a class="link-arrow" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20movimenta%C3%A7%C3%A3o%20industrial." target="_blank" rel="noopener noreferrer">Orçar movimentação industrial <svg class="ico ico--sm" aria-hidden="true"><use href="#i-go"/></svg></a>
                 </div>
               </article>
 
@@ -252,7 +244,7 @@
                   <span class="job__num">03</span>
                   <h3 class="h3">Montagem de estruturas</h3>
                   <p>Estruturas metálicas, coberturas e peças de grande porte erguidas e encaixadas no alto, com o guindaste patolado e a área sinalizada.</p>
-                  <a class="link-arrow" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20montagem%20de%20estrutura." target="_blank" rel="noopener">Orçar montagem <svg class="ico ico--sm" aria-hidden="true"><use href="#i-go"/></svg></a>
+                  <a class="link-arrow" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20montagem%20de%20estrutura." target="_blank" rel="noopener noreferrer">Orçar montagem <svg class="ico ico--sm" aria-hidden="true"><use href="#i-go"/></svg></a>
                 </div>
               </article>
             </div>
@@ -283,7 +275,7 @@
           <div class="capacity__copy">
             <h2 class="h2 h2--light" id="capacity-title">Do leve ao pesado.</h2>
             <p>Guindastes articulados de 30 até 100 toneladas. Conta o peso da carga, a altura e como é o acesso ao local, e a gente indica o equipamento que resolve.</p>
-            <a class="btn btn--yellow" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site.%20Qual%20guindaste%20eu%20preciso%20para%20minha%20carga%3F" target="_blank" rel="noopener">
+            <a class="btn btn--yellow" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site.%20Qual%20guindaste%20eu%20preciso%20para%20minha%20carga%3F" target="_blank" rel="noopener noreferrer">
               <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>
               Qual guindaste eu preciso?
             </a>
@@ -347,7 +339,7 @@
             </div>
           </div>
 
-          <a class="chat__cta" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20de%20guindaste." target="_blank" rel="noopener">
+          <a class="chat__cta" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20de%20guindaste." target="_blank" rel="noopener noreferrer">
             <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>
             Começar essa conversa
             <svg class="ico ico--sm" aria-hidden="true"><use href="#i-go"/></svg>
@@ -378,7 +370,7 @@
           <span class="cta__line"><span>Tem carga</span></span>
           <span class="cta__line"><span>pra subir?</span></span>
         </h2>
-        <a class="cta__bar" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20de%20guindaste." target="_blank" rel="noopener" data-reveal>
+        <a class="cta__bar" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20de%20guindaste." target="_blank" rel="noopener noreferrer" data-reveal>
           <span class="cta__bar-wa"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span>
           <span class="cta__bar-text">
             <small>Chame no WhatsApp e peça seu orçamento</small>
@@ -399,7 +391,7 @@
         <svg class="logo__arrow" aria-hidden="true"><use href="#i-arrow" fill="url(#arrow-grad)"/></svg>
       </a>
       <p class="footer__about">Trans Guinchos Carlinhos. Aluguel de guindastes articulados de 30 a 100 toneladas.</p>
-      <a class="footer__wa" href="https://wa.me/5551997277891" target="_blank" rel="noopener">
+      <a class="footer__wa" href="https://wa.me/5551997277891" target="_blank" rel="noopener noreferrer">
         <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg> (51) 99727-7891
       </a>
     </div>
@@ -408,9 +400,9 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
-  <script src="assets/js/main.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script src="assets/js/main.js" type="module"></script>
 </body>
 </html>

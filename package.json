@@ -1,0 +1,14 @@
+{
+  "name": "trans-guinchos-carlinhos",
+  "private": true,
+  "description": "Landing page da Trans Guinchos Carlinhos",
+  "type": "module",
+  "scripts": {
+    "dev": "python3 tools/serve.py",
+    "test": "node tests/security-check.mjs",
+    "test:live": "node tests/security-check.mjs --url http://127.0.0.1:5173"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

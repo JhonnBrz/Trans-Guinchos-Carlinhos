@@ -1,0 +1,11 @@
+# HTTP security headers for hosts that read this file (Cloudflare Pages, Netlify).
+# GitHub Pages ignores it; there the <meta> CSP in index.html is what applies.
+
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
