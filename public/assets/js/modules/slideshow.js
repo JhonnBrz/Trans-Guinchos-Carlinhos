@@ -1,47 +1,67 @@
-import { $, $$, pad2, prefersReducedMotion } from './dom.js';
+import { $, $$, prefersReducedMotion } from './dom.js';
 
-const INTERVAL_MS = 4600;
-const FIRST_SWAP_DELAY_MS = 1800;
+const SLIDE_MS = 5200;
 
-// Hero photo rotation. Each new photo wipes in from the bottom (CSS), as if
-// it were being hoisted. Pauses while the hero is off screen or the tab is hidden.
+// Hero photo rotation: crossfade with a slow push-in, story-style progress
+// dots, and a blurred copy of the photo behind the card on wide screens.
+// Pauses while the hero is off screen or the tab is hidden.
 export function initSlideshow() {
-  const slides = $$('[data-slides] img');
+  const hero = $('[data-hero]');
+  const slides = $$('[data-slide]');
+  const backdrops = $$('[data-slide-backdrop]');
+  const dots = $$('[data-slide-dot]');
   const caption = $('[data-slide-caption]');
-  const counter = $('[data-slide-index]');
-  const hero = $('.hero');
-  if (slides.length < 2 || prefersReducedMotion()) return;
+  if (!hero || slides.length < 2) return;
 
+  const autoplay = !prefersReducedMotion();
   let current = 0;
   let timer = null;
-  let heroInView = true;
+  let inView = true;
 
-  const show = (next) => {
-    slides.forEach((slide) => slide.classList.remove('is-prev'));
-    slides[current].classList.replace('is-on', 'is-prev');
-    slides[next].classList.add('is-on');
-    if (caption) caption.textContent = slides[next].dataset.caption;
-    if (counter) counter.textContent = pad2(next + 1);
-    current = next;
+  hero.style.setProperty('--slide-duration', `${SLIDE_MS}ms`);
+
+  const show = (index) => {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((el, n) => el.classList.toggle('is-active', n === current));
+    backdrops.forEach((el, n) => el.classList.toggle('is-active', n === current));
+    dots.forEach((dot, n) => {
+      dot.classList.toggle('is-active', n === current);
+      if (n === current) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
+    if (caption) caption.textContent = slides[current].dataset.caption;
   };
 
   const stop = () => {
-    clearInterval(timer);
+    clearTimeout(timer);
     timer = null;
+    hero.classList.remove('is-playing');
   };
 
-  const start = () => {
-    if (timer || !heroInView || document.hidden) return;
-    timer = setInterval(() => show((current + 1) % slides.length), INTERVAL_MS);
+  const schedule = () => {
+    stop();
+    if (!autoplay || !inView || document.hidden) return;
+    hero.classList.add('is-playing');
+    timer = setTimeout(() => {
+      show(current + 1);
+      schedule();
+    }, SLIDE_MS);
   };
 
-  if (hero && 'IntersectionObserver' in window) {
+  dots.forEach((dot, n) =>
+    dot.addEventListener('click', () => {
+      show(n);
+      schedule();
+    })
+  );
+
+  if ('IntersectionObserver' in window) {
     new IntersectionObserver(([entry]) => {
-      heroInView = entry.isIntersecting;
-      heroInView ? start() : stop();
+      inView = entry.isIntersecting;
+      schedule();
     }).observe(hero);
   }
+  document.addEventListener('visibilitychange', schedule);
 
-  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
-  setTimeout(start, FIRST_SWAP_DELAY_MS);
+  schedule();
 }
