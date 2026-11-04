@@ -19,7 +19,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@500&display=swap">
-  <link rel="preload" as="image" href="assets/img/montagem-estrutura-760.webp">
   <link rel="stylesheet" href="assets/css/style.css">
 
   <script type="application/ld+json">
@@ -85,84 +84,62 @@
   <main id="conteudo">
 
     <!-- ============ HERO ============ -->
-    <section class="hero" id="topo" aria-labelledby="hero-title">
+    <section class="hero" id="topo" aria-labelledby="hero-title" data-hero>
       <div class="hero__grid-bg" aria-hidden="true"></div>
-      <div class="wrap hero__grid">
-        <div class="hero__copy" data-hero-copy>
-          <p class="tag hero__tag" data-hero-fade>Trans Guinchos Carlinhos · Aluguel de guindastes</p>
 
-          <h1 class="hero__title" id="hero-title">
-            <span class="hero__line hero__line--sm"><span>Solução em</span></span>
-            <span class="hero__line"><span>Elevação</span></span>
-            <span class="hero__line"><span>de cargas<svg class="hero__arrow" aria-hidden="true"><use href="#i-arrow" fill="url(#arrow-grad)"/></svg></span></span>
-          </h1>
+      <div class="hero__copy" data-hero-copy>
+        <p class="tag hero__tag" data-hero-fade>Trans Guinchos Carlinhos · +20 anos no mercado</p>
 
-          <p class="hero__lede hero__lede--short" data-hero-fade>Guindastes de 30 a 100 toneladas. Mais de 20 anos no mercado.</p>
-          <p class="hero__lede hero__lede--long" data-hero-fade>
-            Guindastes articulados de <strong>30 a 100 toneladas</strong> para obra, indústria e montagem de estruturas.
-            Você conta o que precisa subir, a gente indica o guindaste certo.
-          </p>
+        <h1 class="hero__title" id="hero-title">
+          <span class="hero__line hero__line--sm"><span>Aluguel de</span></span>
+          <span class="hero__line"><span>Guindastes</span></span>
+          <span class="hero__line hero__line--mark"><span>30 a 100 t<svg class="hero__arrow" aria-hidden="true"><use href="#i-arrow" fill="url(#arrow-grad)"/></svg></span></span>
+        </h1>
 
-          <div class="hero__actions" data-hero-fade>
-            <a class="btn btn--yellow btn--lg" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20de%20guindaste." target="_blank" rel="noopener noreferrer">
-              <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>
-              Pedir orçamento no WhatsApp
-            </a>
-            <a class="link-arrow" href="#servicos">Ver em operação <svg class="ico ico--sm" aria-hidden="true"><use href="#i-go"/></svg></a>
+        <p class="hero__lede" data-hero-fade>Elevação de cargas para obras, indústria e montagem de estruturas. Orçamento direto no WhatsApp.</p>
+
+        <div class="hero__services" data-hero-fade>
+          <p class="hero__services-label" id="services-label">Qual é o serviço?</p>
+          <div class="hero__chips" role="group" aria-labelledby="services-label">
+            <button type="button" class="chip glass is-active" aria-pressed="true" data-service="0" data-caption="Construção civil" data-label="obra" data-href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20uma%20obra.">Obra</button>
+            <button type="button" class="chip glass" aria-pressed="false" data-service="1" data-caption="Indústria" data-label="movimentação industrial" data-href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20movimenta%C3%A7%C3%A3o%20industrial.">Indústria</button>
+            <button type="button" class="chip glass" aria-pressed="false" data-service="2" data-caption="Montagem de estrutura" data-label="montagem" data-href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20montagem%20de%20estrutura.">Montagem</button>
           </div>
-
-          <div class="hero__quick" data-hero-fade>
-            <p class="hero__quick-label" id="quick-label">Orçamento rápido para</p>
-            <ul class="hero__chips" aria-labelledby="quick-label">
-              <li><a class="chip glass" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20uma%20obra." target="_blank" rel="noopener noreferrer">Obra</a></li>
-              <li><a class="chip glass" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20movimenta%C3%A7%C3%A3o%20industrial." target="_blank" rel="noopener noreferrer">Indústria</a></li>
-              <li><a class="chip glass" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20montagem%20de%20estrutura." target="_blank" rel="noopener noreferrer">Montagem</a></li>
-            </ul>
-          </div>
-
-          <dl class="specs" data-hero-fade>
-            <div><dt>Capacidade</dt><dd>30–100<small>ton</small></dd></div>
-            <div><dt>No mercado</dt><dd>+20<small>anos</small></dd></div>
-          </dl>
         </div>
 
-        <div class="hero__visual">
-          <div class="hoist" data-hoist>
-            <div class="hoist__drop" data-hoist-drop>
-              <div class="hoist__swing" data-hoist-swing>
-                <span class="hoist__cable" aria-hidden="true"></span>
-                <svg class="hoist__hook" viewBox="0 0 48 96" aria-hidden="true">
-                  <rect x="9" y="0" width="30" height="32" rx="4" fill="#15161A"/>
-                  <circle cx="24" cy="13" r="7.5" fill="none" stroke="#FDCC00" stroke-width="2.5"/>
-                  <circle cx="24" cy="13" r="2.2" fill="#FDCC00"/>
-                  <rect x="9" y="25" width="30" height="7" fill="url(#hz)"/>
-                  <path d="M24 32V44Q37 46 37 60V72A13 13 0 0 1 11 72V64" fill="none" stroke="#15161A" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M11 64 17 60" stroke="#15161A" stroke-width="3" stroke-linecap="round"/>
-                </svg>
-                <svg class="hoist__slings" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                  <path d="M50 0 9 100M50 0 91 100" fill="none" stroke="#15161A" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                </svg>
-                <figure class="hoist__load">
-                  <div class="hoist__photos" data-slides>
-                    <img class="is-on" src="assets/img/montagem-estrutura-760.webp" srcset="assets/img/montagem-estrutura-760.webp 760w, assets/img/montagem-estrutura.webp 1132w" sizes="(min-width: 760px) 400px, 78vw" width="1132" height="1504" alt="Guindaste com lança vermelha estendida içando estrutura em obra" fetchpriority="high" data-caption="Montagem de estrutura">
-                    <img src="assets/img/obra-construcao-760.webp" srcset="assets/img/obra-construcao-760.webp 760w, assets/img/obra-construcao.webp 1232w" sizes="(min-width: 760px) 400px, 78vw" width="1232" height="1628" alt="Guindaste erguendo materiais ao lado de prédio de tijolos em construção" data-caption="Construção civil">
-                    <img src="assets/img/tanque-industrial-760.webp" srcset="assets/img/tanque-industrial-760.webp 760w, assets/img/tanque-industrial.webp 1232w" sizes="(min-width: 760px) 400px, 78vw" width="1232" height="1528" alt="Guindaste içando tanque industrial com cintas de elevação" data-caption="Indústria">
-                  </div>
-                  <figcaption class="hoist__cap">
-                    <span class="dot" aria-hidden="true"></span>
-                    <span class="hoist__cap-text">Em operação · <b data-slide-caption>Montagem de estrutura</b></span>
-                    <span class="hoist__count" aria-hidden="true"><b data-slide-index>01</b>/03</span>
-                  </figcaption>
-                </figure>
-              </div>
-            </div>
-            <div class="dim" aria-hidden="true">
-              <span class="dim__line"></span>
-              <span class="dim__label">Içamento 30–100 t</span>
-            </div>
-          </div>
+        <div class="hero__actions" data-hero-fade>
+          <a class="btn btn--yellow btn--lg" href="https://wa.me/5551997277891?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20guindaste%20para%20uma%20obra." target="_blank" rel="noopener noreferrer" data-hero-cta>
+            <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>
+            <span>Orçar <span data-hero-cta-label>obra</span> no WhatsApp</span>
+          </a>
+          <a class="link-arrow" href="#servicos">Ver em operação <svg class="ico ico--sm" aria-hidden="true"><use href="#i-go"/></svg></a>
         </div>
       </div>
+
+      <figure class="hero__media" data-hero-media>
+        <div class="hero__slides" data-hero-slides>
+          <img class="is-on" data-slide
+               src="assets/img/obra-construcao-760.webp"
+               srcset="assets/img/obra-construcao-760.webp 760w, assets/img/obra-construcao.webp 1232w"
+               sizes="(min-width: 861px) 50vw, 100vw" width="1232" height="1628" fetchpriority="high"
+               alt="Guindaste erguendo materiais ao lado de prédio de tijolos em construção">
+          <img data-slide
+               src="assets/img/tanque-industrial-760.webp"
+               srcset="assets/img/tanque-industrial-760.webp 760w, assets/img/tanque-industrial.webp 1232w"
+               sizes="(min-width: 861px) 50vw, 100vw" width="1232" height="1528"
+               alt="Guindaste içando tanque industrial com cintas de elevação">
+          <img data-slide
+               src="assets/img/montagem-estrutura-760.webp"
+               srcset="assets/img/montagem-estrutura-760.webp 760w, assets/img/montagem-estrutura.webp 1132w"
+               sizes="(min-width: 861px) 50vw, 100vw" width="1132" height="1504"
+               alt="Guindaste com lança vermelha estendida içando estrutura em obra">
+        </div>
+        <figcaption class="hero__panel glass glass--media">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="hero__panel-text">Em operação · <b data-hero-caption>Construção civil</b></span>
+          <span class="hero__progress" aria-hidden="true"><i></i><i></i><i></i></span>
+        </figcaption>
+      </figure>
     </section>
 
     <!-- ============ TICKER ============ -->

@@ -73,24 +73,24 @@ function animateHero(gsap, mm) {
     .fromTo('.hero__line > span', { yPercent: 115, autoAlpha: 1 }, { yPercent: 0, duration: 1.25, stagger: 0.09 })
     .fromTo('[data-hero-fade]', { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, stagger: 0.08, ease: 'power3.out' }, 0.35);
 
-  const leave = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
+  const leave = { trigger: '[data-hero]', start: 'top top', end: 'bottom top', scrub: true };
 
-  // Wide screens: the photo is lowered on the hook, swings, and keeps
-  // climbing as the page scrolls away.
-  mm.add('(min-width: 761px)', () => {
-    gsap.timeline({ delay: 0.1 })
-      .fromTo('[data-hoist-drop]', { yPercent: -45, autoAlpha: 1 }, { yPercent: 0, duration: 1.7, ease: 'power3.out' }, 0.15)
-      .fromTo('[data-hoist-swing]', { rotation: 1.6 }, { rotation: 0, duration: 3.2, ease: 'elastic.out(1, 0.28)' }, 0.55)
-      .fromTo('.dim', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, 1.2);
-    gsap.to('[data-hoist]', { yPercent: -16, ease: 'none', scrollTrigger: leave });
+  // Wide screens: the photo panel opens from the right, then drifts as you leave.
+  mm.add('(min-width: 861px)', () => {
+    gsap.fromTo('[data-hero-media]', { clipPath: 'inset(0% 0% 0% 100% round 0px 0px 0px 44px)' }, {
+      clipPath: 'inset(0% 0% 0% 0% round 0px 0px 0px 44px)',
+      duration: 1.5,
+      ease: 'expo.inOut',
+      delay: 0.05
+    });
+    gsap.to('[data-hero-slides]', { yPercent: 12, ease: 'none', scrollTrigger: leave });
     gsap.to('[data-hero-copy]', { y: -60, ease: 'none', scrollTrigger: leave });
   });
 
   // Phones: the full-screen photo pushes in and the copy lifts away.
-  mm.add('(max-width: 760px)', () => {
-    gsap.set('[data-hoist-drop]', { autoAlpha: 1 });
-    gsap.fromTo('[data-hoist-drop]', { scale: 1.12 }, { scale: 1, duration: 2.2, ease: 'expo.out' });
-    gsap.to('[data-hoist-drop]', { yPercent: 18, ease: 'none', scrollTrigger: leave });
+  mm.add('(max-width: 860px)', () => {
+    gsap.fromTo('[data-hero-slides]', { scale: 1.12 }, { scale: 1, duration: 2.2, ease: 'expo.out' });
+    gsap.to('[data-hero-slides]', { yPercent: 16, ease: 'none', scrollTrigger: leave });
     gsap.to('[data-hero-copy]', { y: -50, autoAlpha: 0, ease: 'none', scrollTrigger: { ...leave, end: '65% top' } });
   });
 }
