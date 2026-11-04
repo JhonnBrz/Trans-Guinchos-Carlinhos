@@ -4,8 +4,8 @@ import { $, $$ } from './dom.js';
 // Everything here is progressive: without the libraries, or with reduced
 // motion, the page is complete and static.
 
-const REGULAR = '(min-width: 900px)';
-const COMPACT = '(max-width: 899px)';
+const DESKTOP = '(min-width: 900px)';
+const MOBILE = '(max-width: 899px)';
 
 export function initMotion() {
   const root = document.documentElement;
@@ -13,6 +13,7 @@ export function initMotion() {
 
   if (!root.classList.contains('js-anim') || !gsap || !ScrollTrigger) {
     root.classList.remove('js-anim');
+    setChatStep(2);
     return;
   }
 
@@ -24,14 +25,15 @@ export function initMotion() {
 
   const mm = gsap.matchMedia();
 
-  // ScrollTrigger measures in creation order: anything below the pinned
-  // services reel must be created after it.
+  // Order matters: ScrollTrigger measures in creation order, so triggers
+  // below the pinned reel must be created after it.
   animateHero(gsap, mm);
-  animateStatement(gsap);
+  animateTicker(gsap);
   animateWork(gsap, mm);
   animateCapacity(gsap);
   animateChat(gsap, ScrollTrigger);
-  animateClosing(gsap);
+  animateYears(gsap);
+  animateCta(gsap);
   animateReveals(gsap, ScrollTrigger);
 
   const refresh = () => ScrollTrigger.refresh();
@@ -50,7 +52,6 @@ function initSmoothScroll(gsap, ScrollTrigger, Lenis) {
 function initAnchors(lenis) {
   if (!lenis) return; // native smooth scrolling + scroll-padding handle it
   const header = $('[data-header]');
-  const offset = () => -(header.offsetTop + header.offsetHeight + 16);
 
   $$('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (event) => {
@@ -59,51 +60,46 @@ function initAnchors(lenis) {
       if (!target) return;
       event.preventDefault();
       const toTop = id === '#topo';
-      lenis.scrollTo(toTop ? 0 : target, { offset: toTop ? 0 : offset(), duration: 1.3 });
+      lenis.scrollTo(toTop ? 0 : target, {
+        offset: toTop ? 0 : -header.offsetHeight,
+        duration: 1.4
+      });
     });
   });
 }
 
 function animateHero(gsap, mm) {
-  gsap.timeline({ defaults: { ease: 'expo.out' }, delay: 0.15 })
-    .fromTo('[data-hero-line]', { yPercent: 110, autoAlpha: 1 }, { yPercent: 0, duration: 1.2, stagger: 0.08 })
-    .fromTo('[data-hero-in]', { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.9, stagger: 0.07, ease: 'power3.out' }, 0.3);
+  gsap.timeline({ defaults: { ease: 'expo.out' }, delay: 0.1 })
+    .fromTo('.hero__line > span', { yPercent: 115, autoAlpha: 1 }, { yPercent: 0, duration: 1.25, stagger: 0.09 })
+    .fromTo('[data-hero-fade]', { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, stagger: 0.08, ease: 'power3.out' }, 0.35);
 
-  const leave = { trigger: '[data-hero]', start: 'top top', end: 'bottom top', scrub: true };
+  const leave = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
 
-  // Compact: the full-screen photo settles into a rounded card as you scroll on.
-  mm.add(COMPACT, () => {
-    gsap.to('[data-hero-media]', { scale: 0.9, borderRadius: 32, ease: 'none', scrollTrigger: leave });
-    gsap.to('[data-hero-content]', { y: -40, autoAlpha: 0, ease: 'none', scrollTrigger: { ...leave, end: '60% top' } });
+  // Wide screens: the photo is lowered on the hook, swings, and keeps
+  // climbing as the page scrolls away.
+  mm.add('(min-width: 761px)', () => {
+    gsap.timeline({ delay: 0.1 })
+      .fromTo('[data-hoist-drop]', { yPercent: -45, autoAlpha: 1 }, { yPercent: 0, duration: 1.7, ease: 'power3.out' }, 0.15)
+      .fromTo('[data-hoist-swing]', { rotation: 1.6 }, { rotation: 0, duration: 3.2, ease: 'elastic.out(1, 0.28)' }, 0.55)
+      .fromTo('.dim', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, 1.2);
+    gsap.to('[data-hoist]', { yPercent: -16, ease: 'none', scrollTrigger: leave });
+    gsap.to('[data-hero-copy]', { y: -60, ease: 'none', scrollTrigger: leave });
   });
 
-  // Regular: the card drifts up faster than the copy for depth.
-  mm.add(REGULAR, () => {
-    gsap.fromTo('[data-hero-media]', { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.4, ease: 'expo.out', delay: 0.2 });
-    gsap.to('[data-hero-media]', { yPercent: -10, ease: 'none', scrollTrigger: leave });
-    gsap.to('[data-hero-content]', { y: -50, ease: 'none', scrollTrigger: leave });
+  // Phones: the full-screen photo pushes in and the copy lifts away.
+  mm.add('(max-width: 760px)', () => {
+    gsap.set('[data-hoist-drop]', { autoAlpha: 1 });
+    gsap.fromTo('[data-hoist-drop]', { scale: 1.12 }, { scale: 1, duration: 2.2, ease: 'expo.out' });
+    gsap.to('[data-hoist-drop]', { yPercent: 18, ease: 'none', scrollTrigger: leave });
+    gsap.to('[data-hero-copy]', { y: -50, autoAlpha: 0, ease: 'none', scrollTrigger: { ...leave, end: '65% top' } });
   });
 }
 
-// Words light up one by one as the paragraph scrolls through the viewport.
-function animateStatement(gsap) {
-  const text = $('[data-words]');
-  if (!text) return;
-
-  const words = text.textContent.trim().split(/\s+/);
-  text.textContent = '';
-  words.forEach((word, i) => {
-    const span = document.createElement('span');
-    span.className = 'word';
-    span.textContent = word;
-    text.append(span, i < words.length - 1 ? ' ' : '');
-  });
-
-  gsap.fromTo(text.querySelectorAll('.word'), { opacity: 0.16 }, {
-    opacity: 1,
+function animateTicker(gsap) {
+  gsap.fromTo('[data-ticker]', { xPercent: 0 }, {
+    xPercent: -18,
     ease: 'none',
-    stagger: 0.1,
-    scrollTrigger: { trigger: text, start: 'top 80%', end: 'bottom 45%', scrub: true }
+    scrollTrigger: { trigger: '.ticker', start: 'top bottom', end: 'bottom top', scrub: 0.6 }
   });
 }
 
@@ -112,8 +108,8 @@ function animateWork(gsap, mm) {
   const track = $('[data-work-track]');
   const jobs = $$('[data-job]');
 
-  // Regular: vertical scroll drives the reel sideways while the section is pinned.
-  mm.add(REGULAR, () => {
+  // Desktop: vertical scroll drives the reel sideways while the section is pinned.
+  mm.add(DESKTOP, () => {
     const distance = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
     const reel = gsap.to(track, {
       x: () => -distance(),
@@ -129,16 +125,24 @@ function animateWork(gsap, mm) {
     });
 
     jobs.forEach((job) => {
-      gsap.fromTo($('img', job), { scale: 1.18 }, {
+      gsap.fromTo($('img', job), { scale: 1.2 }, {
         scale: 1,
         ease: 'none',
         scrollTrigger: { trigger: job, containerAnimation: reel, start: 'left right', end: 'right 70%', scrub: true }
       });
+      gsap.fromTo($('.job__body', job).children, { y: 18, autoAlpha: 0 }, {
+        y: 0,
+        autoAlpha: 1,
+        stagger: 0.06,
+        duration: 0.7,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: job, containerAnimation: reel, start: 'left 75%', toggleActions: 'play none none reverse' }
+      });
     });
   });
 
-  // Compact: the reel is a native swipe carousel; bring the cards in once.
-  mm.add(COMPACT, () => {
+  // Mobile: the reel is a native swipe carousel; just bring the cards in.
+  mm.add(MOBILE, () => {
     gsap.fromTo(jobs, { y: 30, autoAlpha: 0 }, {
       y: 0,
       autoAlpha: 1,
@@ -170,6 +174,7 @@ function animateCapacity(gsap) {
     .to({}, { duration: 0.08 })
     .to(load, { tonnes: 100, duration: 0.84, onUpdate: render }, 0.08)
     .fromTo('[data-gauge-fill]', { scaleX: 0 }, { scaleX: 1, duration: 0.84 }, 0.08)
+    .fromTo('[data-gauge-runner]', { xPercent: 0 }, { xPercent: 100, duration: 0.84 }, 0.08)
     .to({}, { duration: 0.08 });
 
   gsap.fromTo('.capacity__readout, .capacity__copy', { y: 40, autoAlpha: 0 }, {
@@ -182,7 +187,7 @@ function animateCapacity(gsap) {
   });
 }
 
-function setStep(index) {
+function setChatStep(index) {
   $$('[data-step]').forEach((step, n) => step.classList.toggle('is-active', n === index));
 }
 
@@ -198,28 +203,38 @@ function animateChat(gsap, ScrollTrigger) {
 
   ScrollTrigger.create({
     trigger: '[data-chat]',
-    start: 'top 70%',
+    start: 'top 68%',
     once: true,
     onEnter: () => {
       gsap.timeline()
-        .call(() => setStep(0))
+        .call(() => setChatStep(0))
         .fromTo(sent[0], hidden, shown)
-        .call(() => setStep(1), null, '+=0.7')
+        .call(() => setChatStep(1), null, '+=0.7')
         .fromTo(sent[1], hidden, shown, '<')
         .fromTo(sent[2], hidden, shown, '+=0.5')
         .fromTo(typing, hidden, { ...shown, duration: 0.35 }, '+=0.45')
         .to(typing, { autoAlpha: 0, duration: 0.2 }, '+=1.3')
-        .call(() => setStep(2))
+        .call(() => setChatStep(2))
         .fromTo(reply, hidden, shown, '<');
     }
   });
 }
 
-function animateClosing(gsap) {
-  gsap.fromTo('[data-closing-backdrop]', { scale: 1.2 }, {
-    scale: 1,
+function animateYears(gsap) {
+  gsap.fromTo('[data-years-fill]', { clipPath: 'inset(100% 0% 0% 0%)' }, {
+    clipPath: 'inset(0% 0% 0% 0%)',
     ease: 'none',
-    scrollTrigger: { trigger: '[data-closing]', start: 'top bottom', end: 'bottom bottom', scrub: true }
+    scrollTrigger: { trigger: '.years', start: 'top 70%', end: 'center 45%', scrub: 0.6 }
+  });
+}
+
+function animateCta(gsap) {
+  gsap.fromTo('.cta__line > span', { yPercent: 115, autoAlpha: 1 }, {
+    yPercent: 0,
+    duration: 1.2,
+    stagger: 0.1,
+    ease: 'expo.out',
+    scrollTrigger: { trigger: '.cta', start: 'top 72%', once: true }
   });
 }
 
