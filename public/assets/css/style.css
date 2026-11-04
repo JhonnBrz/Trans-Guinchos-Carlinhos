@@ -111,7 +111,48 @@ html.lenis, html.lenis body { height: auto; }
 .glass--media::before {
   background: radial-gradient(120% 90% at 25% 0%, rgba(255, 255, 255, .26), rgba(255, 255, 255, 0) 60%);
 }
+/* Light that follows the pointer or finger (set by modules/glass.js). */
+.glass::after,
+.button--glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(180px circle at var(--glass-x, 50%) var(--glass-y, 50%), rgba(255, 255, 255, .42), rgba(255, 255, 255, 0) 70%);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-standard);
+  pointer-events: none;
+}
+.button--glass { position: relative; isolation: isolate; }
+.is-lit::after { opacity: 1; }
+
+/* Interactive glass lifts slightly under the pointer and squishes when pressed. */
+.chip,
+.button--glass,
+.closing__cta,
+.hero__pager {
+  transition:
+    translate var(--dur-base) var(--ease-out),
+    scale var(--dur-base) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-base) var(--ease-standard);
+}
+.chip.is-lit,
+.button--glass.is-lit,
+.closing__cta.is-lit {
+  translate: 0 -2px;
+  scale: 1.03;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, .32), inset 0 1px 0 rgba(255, 255, 255, .4);
+}
+.chip:active,
+.button.button--glass:active,
+.closing__cta:active { transform: none; scale: .95; }
+.nav-bar__inner.is-lit { box-shadow: var(--glass-shadow), 0 0 0 1px var(--glass-edge), inset 0 1px 0 rgba(255, 255, 255, .5); }
+
 @media (prefers-color-scheme: dark) {
+  .glass::after,
+  .button--glass::after { background: radial-gradient(180px circle at var(--glass-x, 50%) var(--glass-y, 50%), rgba(255, 255, 255, .2), rgba(255, 255, 255, 0) 70%); }
   .glass { box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, .1); }
   .glass::before { opacity: .35; }
 }
@@ -172,7 +213,14 @@ html.lenis, html.lenis body { height: auto; }
   border: 1px solid var(--glass-edge-on-media);
   color: var(--label-on-media);
 }
-.button--glass:hover { background: rgba(255, 255, 255, .24); }
+.button.button--glass {
+  transition:
+    translate var(--dur-base) var(--ease-out),
+    scale var(--dur-base) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-base) var(--ease-standard);
+}
+.button--glass:hover { background: rgba(190, 190, 198, .34); }
 
 .button--small { padding: 0 var(--space-4); font-size: var(--text-subhead); }
 .button--large { min-height: 54px; padding: 0 var(--space-6); }
@@ -196,10 +244,8 @@ html.lenis, html.lenis body { height: auto; }
   border-radius: var(--radius-full);
   font-size: var(--text-subhead);
   font-weight: 600;
-  transition: transform var(--dur-fast) var(--ease-standard), background-color var(--dur-fast) var(--ease-standard);
 }
-.chip:hover { background: rgba(255, 255, 255, .26); }
-.chip:active { transform: scale(.96); }
+.chip:hover { background: rgba(190, 190, 198, .34); }
 
 /* Logo ------------------------------------------------------------------ */
 
@@ -806,10 +852,8 @@ html.lenis, html.lenis body { height: auto; }
   padding: var(--space-2) var(--space-6) var(--space-2) var(--space-2);
   border-radius: var(--radius-full);
   text-align: left;
-  transition: transform var(--dur-fast) var(--ease-standard), background-color var(--dur-fast) var(--ease-standard);
 }
-.closing__cta:hover { background: rgba(255, 255, 255, .24); }
-.closing__cta:active { transform: scale(.98); }
+.closing__cta:hover { background: rgba(190, 190, 198, .34); }
 .closing__cta-icon {
   display: grid;
   place-items: center;
