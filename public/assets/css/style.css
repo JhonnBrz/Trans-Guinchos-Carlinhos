@@ -629,7 +629,15 @@ html.lenis, html.lenis body { height: auto; }
     box-shadow: 0 10px 30px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .3);
   }
   .hero__chips .chip.is-active { background: #fff; border-color: #fff; color: var(--ink); }
-  .hero__actions .btn { flex: 1 1 100%; }
+  .hero__actions .btn {
+    flex: 1 1 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 56px;
+    padding: 12px 20px;
+    white-space: normal;
+    text-align: center;
+  }
 }
 
 /* ---------- Ticker ---------- */
