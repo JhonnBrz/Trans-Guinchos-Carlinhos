@@ -12,7 +12,7 @@ import { join, relative, extname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const PUBLIC = join(ROOT, 'public');
+const PUBLIC = join(ROOT, 'docs');
 const ALLOWED_SCRIPT_HOSTS = ['cdnjs.cloudflare.com', 'unpkg.com'];
 const ALLOWED_LINK_HOSTS = ['wa.me'];
 const REQUIRED_HEADERS = [
@@ -79,7 +79,7 @@ check(
 // ---------------------------------------------------------- published files
 
 check(
-  'public/ holds only site assets',
+  'docs/ holds only site assets',
   publicFiles
     .filter((file) => {
       const name = basename(file);
@@ -192,7 +192,7 @@ check(
 const headersFile = join(PUBLIC, '_headers');
 const headersText = read(headersFile).toLowerCase();
 check(
-  'public/_headers declares the security headers',
+  'docs/_headers declares the security headers',
   [...REQUIRED_HEADERS, 'strict-transport-security']
     .filter((header) => !headersText.includes(`${header}:`))
     .map((header) => `missing ${header}`)

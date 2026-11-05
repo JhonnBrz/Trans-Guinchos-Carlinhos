@@ -1,6 +1,6 @@
-"""Local preview server for public/.
+"""Local preview server for docs/.
 
-Serves the site with the same security headers declared in public/_headers,
+Serves the site with the same security headers declared in docs/_headers,
 so problems with the Content-Security-Policy show up locally before deploy.
 Caching is disabled to make edits visible on every reload.
 
@@ -13,7 +13,7 @@ import functools
 import http.server
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent / "public"
+ROOT = Path(__file__).resolve().parent.parent / "docs"
 HEADERS_FILE = ROOT / "_headers"
 
 

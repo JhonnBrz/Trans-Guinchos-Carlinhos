@@ -7,7 +7,7 @@ articulados de 30 a 100 toneladas. O único canal de contato é o WhatsApp
 ## Estrutura
 
 ```
-public/            o site publicado: só HTML, CSS, JS e imagens
+docs/            o site publicado: só HTML, CSS, JS e imagens
   index.html
   _headers         cabeçalhos HTTP de segurança (Cloudflare Pages / Netlify)
   assets/
@@ -23,7 +23,7 @@ tests/
   security-check.mjs
 ```
 
-Só a pasta `public/` vai para a hospedagem. Ferramentas, testes e este README
+Só a pasta `docs/` vai para a hospedagem. Ferramentas, testes e este README
 ficam fora do que o visitante consegue acessar.
 
 ## Rodando localmente
@@ -47,7 +47,7 @@ existe de proteção:
 - **Subresource Integrity** nas bibliotecas externas (GSAP, ScrollTrigger e
   Lenis): se a CDN for comprometida e o arquivo mudar, o navegador recusa.
 - **Links externos** com `rel="noopener noreferrer"`.
-- **Cabeçalhos HTTP** em `public/_headers`: HSTS, `X-Frame-Options: DENY`
+- **Cabeçalhos HTTP** em `docs/_headers`: HSTS, `X-Frame-Options: DENY`
   (contra clickjacking), `nosniff`, `Permissions-Policy` e `Referrer-Policy`.
 
 ### Testes
@@ -60,12 +60,15 @@ npm run test:live  # também testa o servidor rodando (npm run dev em outro term
 Os testes procuram segredos nos arquivos e em todo o histórico do git, validam
 o CSP e o SRI, garantem que não há scripts inline, handlers `on*`, formulários
 ou funções perigosas no JS (`eval`, `innerHTML`, `document.write`). No modo
-`--live`, também tentam acessar `.git`, `.env`, arquivos fora de `public/`,
+`--live`, também tentam acessar `.git`, `.env`, arquivos fora de `docs/`,
 travessia de diretório (`../`), listagem de pastas e métodos de escrita
 (PUT, DELETE, POST).
 
 ### Ao publicar
 
+- **GitHub Pages:** em *Settings → Pages → Build and deployment*, use
+  **Deploy from a branch → `main` → `/docs`**. Assim só o site é publicado;
+  testes, ferramentas e este README ficam de fora.
 - **GitHub Pages** não permite cabeçalhos HTTP personalizados; lá vale só o CSP
   em `<meta>`. HTTPS e HSTS o próprio `github.io` já força. Proteção contra
   clickjacking (`frame-ancestors`) exige uma hospedagem que leia `_headers`,

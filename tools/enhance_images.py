@@ -1,6 +1,6 @@
 """Prepare photos for the site: clean up, enlarge and export as WebP.
 
-Produces two files per photo in public/assets/img/: a full-size version
+Produces two files per photo in docs/assets/img/: a full-size version
 (at least 1100 px wide) and a 760 px version used on phones.
 
     python3 tools/enhance_images.py photo.jpg --name obra-construcao
@@ -20,7 +20,7 @@ import cv2
 import numpy as np
 from PIL import Image
 
-OUTPUT_DIR = Path(__file__).resolve().parent.parent / "public" / "assets" / "img"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "docs" / "assets" / "img"
 TARGET_WIDTH = 1100
 MOBILE_WIDTH = 760
 
