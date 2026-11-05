@@ -67,15 +67,17 @@ travessia de diretório (`../`), listagem de pastas e métodos de escrita
 ### Ao publicar
 
 - **GitHub Pages** não permite cabeçalhos HTTP personalizados; lá vale só o CSP
-  em `<meta>`. Proteção contra clickjacking (`frame-ancestors`) e HSTS exigem
-  uma hospedagem que leia `_headers`, como Cloudflare Pages ou Netlify.
-- Publique apenas a pasta `public/`.
+  em `<meta>`. HTTPS e HSTS o próprio `github.io` já força. Proteção contra
+  clickjacking (`frame-ancestors`) exige uma hospedagem que leia `_headers`,
+  como Cloudflare Pages ou Netlify.
+- **Link provisório:** o `index.html` tem `<meta name="robots"
+  content="noindex, nofollow">` para o Google não indexar a prévia. Remova
+  essa linha no lançamento oficial.
 
 ## Imagens
 
-As fotos atuais foram tratadas a partir de prints do Instagram, o que limita a
-nitidez. Para a melhor qualidade, use os arquivos originais da câmera (enviados
-pelo WhatsApp como **documento**, que não comprime):
+As fotos são as originais enviadas pelo cliente, convertidas para WebP em dois
+tamanhos (inteira e 760 px para celular). Para tratar uma foto nova:
 
 ```bash
 python3 tools/enhance_images.py original.jpg --name obra-construcao
